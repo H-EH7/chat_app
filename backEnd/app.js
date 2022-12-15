@@ -1,10 +1,23 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const testRoutes = require("./routes/test");
+const Test = require("./models/test");
 
 const app = express();
 const port = 3000;
+
+const dbName = "test";
+mongoose
+  .connect(`mongodb://localhost:27017/${dbName}`)
+  .then(() => {
+    console.log("MongoDB is connected!");
+  })
+  .catch((err) => {
+    console.log("MongoDB connection is failed...");
+    console.log(err);
+  });
 
 app.use(bodyParser.json());
 

@@ -3,7 +3,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const testRoutes = require("./routes/test");
-const Test = require("./models/test");
+const userRoutes = require("./routes/user");
+const chatRoutes = require("./routes/chat");
+
+const User = require("./models/user");
+const Chat = require("./models/chat");
 
 const app = express();
 const port = 3000;
@@ -21,7 +25,7 @@ mongoose
 
 app.use(bodyParser.json());
 
-// CORS 설정 오류 해결
+// CORS 설정
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
@@ -29,12 +33,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// ========================== 라우트 ==========================
 app.use("/root", testRoutes);
+app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
+// ============================================================
 
 const server = app.listen(port);
 
+// ======================= WebSocket ==========================
 const io = require("socket.io")(server, {
-  // CORS 설정 오류 해결
+  // CORS 설정
   cors: {
     origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
@@ -44,3 +53,4 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   console.log("Client connected!");
 });
+// ============================================================

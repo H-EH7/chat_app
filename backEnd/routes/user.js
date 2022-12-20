@@ -4,10 +4,10 @@ const userController = require("../controllers/user");
 
 const router = express.Router();
 
-// GET /user
-router.get("/", userController.get);
+// GET /user/:id
+router.get("/:id", userController.findById);
 
 // POST /user
-router.post("/", userController.post);
+router.post("/", userController.registerUser);
 
 module.exports = router;

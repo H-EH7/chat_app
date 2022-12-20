@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
   friendsList: [{ type: ObjectId }],
   chatsList: [
     {
-      chatId: { type: ObjectId, required: true },
-      updateTime: { type: Date, required: true },
+      chatId: { type: ObjectId },
+      updateTime: { type: Date },
     },
   ],
 });

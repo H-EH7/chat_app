@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const userRoutes = require("./routes/user");
 const chatRoutes = require("./routes/chat");
@@ -24,11 +25,22 @@ app.use(bodyParser.json());
 /* CORS 설정
  */
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
+
+/* 세션 설정
+ */
+app.use(
+  session({
+    secret: "hollymolly!", // 환경변수
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 /* 라우트
  */

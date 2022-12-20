@@ -47,3 +47,28 @@ exports.registerUser = async (req, res, next) => {
     res.send("이미 등록된 ID입니다.");
   }
 };
+
+/* 로그인
+req.body => {id: userId, pwd: 비밀번호}
+ */
+exports.logIn = async (req, res, next) => {
+  // 입력 아이디와 같은 아이디를 갖는 User 찾기
+  const foundUser = await User.findOne({ userId: req.body.id });
+
+  if (foundUser === null) {
+    console.log("아이디를 확인해주세요");
+    return res.status(404).end();
+  }
+
+  const isCorrectUser = await bcrypt.compare(req.body.pwd, foundUser.pwd);
+
+  if (isCorrectUser) {
+    req.session._id = foundUser._id;
+    console.log(req.session.id);
+    console.log(req.session._id);
+    return res.send(req.session.id);
+  } else {
+    console.log("비밀번호를 확인해주세요");
+    return res.status(404).end();
+  }
+};

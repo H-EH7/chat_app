@@ -40,7 +40,7 @@ exports.sendMessage = async (req, res, next) => {
     text: req.body.text,
     sendTime: new Date(),
   };
-  const updatedMessage = await Chat.updateOne({ _id: req.params.id }, { $push: { messages: newMessage } });
+  const updatedMessage = await Chat.findOneAndUpdate({ _id: req.params.id }, { $push: { messages: newMessage } });
   console.log(updatedMessage);
   res.send(updatedMessage);
 };

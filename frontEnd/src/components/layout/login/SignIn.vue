@@ -2,11 +2,11 @@
   <div class="sign-in">
     <div class="form-container">
       <label for="id">ID: </label>
-      <input id="id" type="text" />
+      <input id="id" type="text" v-model="id" />
     </div>
     <div class="form-container">
       <label for="pw">PW: </label>
-      <input id="pw" type="password" />
+      <input id="pw" type="password" v-model="pw" />
     </div>
     <div class="form-container">
       <button @click="logIn">Log-In</button> | <button @click="goSignUp">Sign-Up</button>
@@ -17,8 +17,24 @@
 <script>
 export default {
   emits: ["changeSignMode"],
+  data() {
+    return {
+      id: "",
+      pw: "",
+    };
+  },
   methods: {
-    logIn() {
+    async logIn() {
+      const response = await fetch(`http://localhost:3000/user/login`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          id: this.id,
+          pwd: this.pw,
+        }),
+      });
+
       this.$router.push("/main");
     },
     goSignUp() {

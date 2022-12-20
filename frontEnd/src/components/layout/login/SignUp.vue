@@ -39,12 +39,12 @@ export default {
       }
 
       const newUser = {
-        id: this.newId,
-        pw: this.newPW,
-        name: this.newName,
+        userId: this.newId,
+        pwd: this.newPW,
+        userName: this.newName,
       };
 
-      const response = await fetch(`https://chat-jit-default-rtdb.firebaseio.com/users/${this.newId}.json`, {
+      const response = await fetch(`http://localhost:3000/user`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(newUser),

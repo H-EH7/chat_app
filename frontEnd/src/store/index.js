@@ -6,6 +6,7 @@ const store = createStore({
   modules: { chat: chatMoudle },
   state() {
     return {
+      _id: "",
       userId: "",
       name: "",
       profilePic: "",

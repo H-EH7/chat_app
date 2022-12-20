@@ -1,6 +1,8 @@
 # chat_app
 
-## 사용할 기술
+<br>
+
+> ## 🛠 Tech
 
 `Version control` : Git, GitHub
 
@@ -8,9 +10,9 @@
 
 `Communication` : HTTP, WebSocket
 
+<br>
 
-##
-### 🖥 Front-end
+> ## 🖥 Front-end
 
 `Language` : Javascript
 
@@ -38,9 +40,9 @@ devDependencies
 ```
 
 
+<br>
 
-##
-### 🏭 Back-end
+> ## 🏭 Back-end
 
 `Language` : Javascript
 
